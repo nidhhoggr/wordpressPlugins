@@ -1,0 +1,6 @@
+error_log
+*.swp
+*.swo
+akismet
+*.svn
+supracommentautoshare

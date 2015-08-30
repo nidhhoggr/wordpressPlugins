@@ -1,0 +1,4 @@
+cronjob instructions
+http://supra/wp-admin/admin-ajax.php?action=supra_scraper&command=ingestion-by-csv&args=2
+
+image scraper

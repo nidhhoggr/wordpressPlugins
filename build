@@ -1,0 +1,1 @@
+zip -r zips/csv/scp$1.zip supraCsvPremium

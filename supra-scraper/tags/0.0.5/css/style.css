@@ -1,0 +1,173 @@
+.wrap_sscrap h3 {
+  margin: 2em 0;
+}
+
+#labeling td {
+    text-align: center;
+    font-weight: bold;
+}
+
+#pm_buttons td {
+    text-align: center;
+}
+
+
+.clear {
+    clear: both;
+}
+
+#flash {
+    font-weight: bold;
+}
+
+span.success {
+    color: green;
+}
+
+span.error {
+    color: red;
+}
+
+.wrap_sscrap {
+    font-weight: bold;
+}
+
+.wrap_sscrap input, .wrap_sscrap select {
+    float: right
+}
+
+.wrap_sscrap input:after, .wrap_sscrap select:after {
+    clear: both;
+}
+
+.wrap_sscrap select {
+    min-width: 50%;
+}
+
+
+.wrap_sscrap button, .wrap_sscrap input[type=submit] {
+            margin: 7px;
+            padding: 10px;
+            -moz-border-radius: 12px/*{cornerRadius}*/;
+            -webkit-border-radius: 12px/*{cornerRadius}*/;
+            -khtml-border-radius: 12px/*{cornerRadius}*/;
+            border-radius: 12px/*{cornerRadius}*/;
+}
+
+.wrap_sscrap select, .wrap_sscrap input, .wrap_sscrap textarea, .wrap_sscrap button {
+    border: 1px solid #FFA500 !important;
+}
+
+.wrap_sscrap select, .wrap_sscrap input, .wrap_sscrap textarea {
+    font-weight: normal !important;
+}
+
+.wrap_sscrap button:hover, .wrap_sscrap input[type=submit]:hover {
+
+    border: 1px solid #FF6600 !important;
+    background-color: #E0EEEE;
+}
+
+.wrap_sscrap #input, .wrap_sscrap .input {
+    min-height: 30px; 
+    clear: both;
+}
+
+.premium_only {
+    font-weight: bold;
+    color: #FF0000;
+}
+
+#supra_csv_mapping_preset {
+
+width: 30%;
+
+}
+
+#file_selector {
+    width: 300px;
+}
+
+.help {
+    white-space: no-wrap !important;
+    color:grey;
+    font-size: 10px;
+    display: block; 
+}
+
+#uploaded_files {
+    margin-top: 50px;
+}
+
+#uploaded_files li {
+    min-height: 80px;
+}
+
+.tooltip {
+    display: block;
+    float: left;
+    padding-right: 3px; 
+    background: url('../img/help_retina_black.png') no-repeat;
+    width: 19px;
+    height: 19px;
+    clear: both;
+}
+
+#sscrap_defaultdesc, #sscrap_sitelinkstext { 
+  width: 100%;
+}
+
+#sscrap_custom_terms {
+  width: 100%;
+  float: none;
+}
+
+.or_divider {
+  text-align: center;
+  height: 20px;
+  font-size: 20px;
+  padding-top: 10px;
+}
+.or_divider b {
+}
+
+input[disabled] {
+  background-color: #FDEEF4;
+}
+
+.stackedButt {
+ display: block;
+ float: none !important;
+ width: 120px; 
+}
+
+.appearDisabled {
+  color:#AAA !important;
+  background-color:#EEE !important;
+}
+
+#aErrList li {
+  background-color: #FF3300;
+  padding: 5px;
+}
+
+#debugList li {
+  background-color: lightgreen;
+  padding: 5px;
+}
+
+#patience {
+  background: url('../img/patience.gif') center center no-repeat;
+  height: 200px;
+  display: none;
+}
+
+#updateExisting {
+  display: none;
+  margin-top: 20px;
+}
+
+.cron-link {
+  font-weight: normal;
+  padding-left: 10px;
+}
