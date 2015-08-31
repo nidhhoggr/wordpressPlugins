@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: csv,import,parser,ingest,custom post,extract,export,attachments,thumbnails
 Requires at least: 3.2.1
 Tested up to: 4.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 
 A plugin to ingest and extract posts from csv files. 
 
@@ -42,6 +42,10 @@ Make sure there are no special characters in the csv values. The will show as qu
 6. Easily debug issues
 
 == Changelog ==
+= 2.0.1 =
+* removed error throwing in remotePost class
+* wrapping filename paraemeters of cli command in qoutes for name with spaces
+* adding the log management page
 = 2.0.0 =
 * fixed major issues with parsing csv lines
 * adding csv file chunking support

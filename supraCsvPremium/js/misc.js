@@ -42,6 +42,31 @@ $(function() {
 
     });
 
+    $('#delete_log').live('click', function() {
+
+        filename_key = $(this).data('key');
+
+        var answer = confirm("Are you sure you want to delete this item?");
+
+        if( ! answer ) return ;
+
+        sMain.baseCall( 'delete_log', filename_key, function(msg) {
+
+            $('#supra_csv_log_forms').html(msg);
+        });
+    });
+
+
+    $('#debug_upload').live('click', function() {
+
+        var file = $(this).data('file');
+
+        sMain.baseCall('debug_file', file, function(msg) {
+            var blob = new Blob([msg], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, file.concat(".debug.txt"));
+        });
+    });
+
     $('#extract_and_export').click( function(e) {
         downloadExtractElToggled = [];
     });
@@ -58,6 +83,27 @@ $(function() {
             $('#supra_csv_extract_forms').html(msg);
             downloadExtractElToggled = [];
         });
+    });
+
+    $('#download_log').live('click', function() {
+
+        var file = $(this).data('file');
+
+        el = $(this);
+
+        elToggled = downloadUploadElToggled[file];
+
+        if( typeof elToggled == "undefined" ) {
+
+          sMain.baseCall('download_log', file, function(msg) {
+            el.parent().append('<div id="previewToggle">' + msg + '</div>');
+            downloadUploadElToggled[file] = true;
+            $('.tablesorter-blue').tablesorter();
+          });
+
+        } else {
+          el.parent().find('#previewToggle').toggle();
+        }
     });
 
     $(document).on('click','#download_extract', function() {

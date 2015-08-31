@@ -90,7 +90,7 @@ class IngestCsv {
         {
             $csvFile = basename($csvFile);
 
-            $command = "php {$ingestScript} {$csvFile} {$mappingFilename}";
+            $command = "php {$ingestScript} '{$csvFile}' '{$mappingFilename}'";
 
             if(@$this->misc_options['is_using_multithreads'])
             {

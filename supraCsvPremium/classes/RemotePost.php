@@ -286,8 +286,6 @@ class RemotePost
                 $this->reportIssue();
             }
         }
-
-        //throw new \Exception($error);
     }
 
     private function xmlencode($data) {
