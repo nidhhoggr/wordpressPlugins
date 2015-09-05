@@ -193,7 +193,7 @@ class SupraCsvPlugin {
     }
 
     public function getPluginDirUrl() {
-        return WP_PLUGIN_URL . '/' . $this->plugin_name .'/';
+        return WP_PLUGIN_URL . DIR_SEP . $this->plugin_name . DIR_SEP;
     }
 
     protected function getPluginRelUploadsDir() {
@@ -222,7 +222,7 @@ class SupraCsvPlugin {
     }
 
     public function getPluginChunkDir() {
-        return $this->getPluginBasePath() . self::$chunks_dir;
+        return $this->getPluginBasePath() . self::$chunks_dir . DIR_SEP;
     }
 
     public function getCsvDir() {
@@ -238,11 +238,11 @@ class SupraCsvPlugin {
     }
 
     public function getCsvDirUrl() {
-        return $this->getPluginUploadsDirUrl() . self::$csv_dir . '/';
+        return $this->getPluginUploadsDirUrl() . self::$csv_dir . DIR_SEP;
     }
 
     public function getExtractedCsvDirUrl() {
-        return $this->getPluginUploadsDirUrl() . self::$extracted_csv_dir . '/';
+        return $this->getPluginUploadsDirUrl() . self::$extracted_csv_dir . DIR_SEP;
     }
 
     public function getPremiumLink($target,$text) {

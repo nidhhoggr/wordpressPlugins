@@ -91,7 +91,8 @@ $xc->setSettingsResolver(function($setting_key) {
             <span class="help">Hold Ctrl to select multiple</span>
             <select id="post_fields" name="post_fields[]" multiple="multiple" style="height: 200px">
                 <?php
-                $postfields = array(
+                  $postfields = array(
+                  'ID',
                   'post_author',
                   'post_date',
                   'post_date_gmt',
