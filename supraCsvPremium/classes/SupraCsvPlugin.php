@@ -53,7 +53,20 @@ class SupraCsvPlugin {
     {
         return $this->logger;
     }
-     
+
+    public function is_func_enabled($func) {
+        $disabled = explode(',', ini_get('disable_functions'));
+        foreach ($disabled as $disableFunction) {
+            $is_disabled[] = trim($disableFunction);
+        }
+        if (in_array($func,$is_disabled)) {
+            $is_enabled = 0;
+        } else {
+            $is_enabled = 1;
+        }
+        return $is_enabled;
+    }
+
     private function setPluginName() {
         $arr = array_reverse(explode(DIR_SEP, dirname(__FILE__)));
         $this->plugin_name = $arr[1];

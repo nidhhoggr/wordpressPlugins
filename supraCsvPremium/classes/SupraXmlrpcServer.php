@@ -47,6 +47,8 @@ class SupraXmlrpcServer {
 //			return false;
 //		}
 
+        
+
 		if (!user_pass_ok($user_login, $user_pass)) {
 			$this->error = new XMLRPC_Error(403, __('Bad login/pass combination.: ' . $user_login . ' ' . $user_pass));
 			return false;
@@ -72,7 +74,7 @@ class SupraXmlrpcServer {
 		$user = wp_authenticate($username, $password);
 
 		if (is_wp_error($user)) {
-			$this->error = new XMLRPC_Error(403, __('Bad login/pass combination.'));
+			$this->error = new XMLRPC_Error(403, __('Bad login/pass combination.: ' .  var_export($username, true) . ' ' . var_export($password, true)));
 			return false;
 		}
 
@@ -458,9 +460,9 @@ class SupraXmlrpcServer {
 	 */
 	protected function _convert_date( $date ) {
 		if ( $date === '0000-00-00 00:00:00' ) {
-			return new IXR_Date( '00000000T00:00:00Z' );
+			return new \IXR_Date( '00000000T00:00:00Z' );
 		}
-		return new IXR_Date( mysql2date( 'Ymd\TH:i:s', $date, false ) );
+		return new \IXR_Date( mysql2date( 'Ymd\TH:i:s', $date, false ) );
 	}
 
 	/**
@@ -474,7 +476,7 @@ class SupraXmlrpcServer {
 	 */
 	protected function _convert_date_gmt( $date_gmt, $date ) {
 		if ( $date !== '0000-00-00 00:00:00' && $date_gmt === '0000-00-00 00:00:00' ) {
-			return new IXR_Date( get_gmt_from_date( mysql2date( 'Y-m-d H:i:s', $date, false ), 'Ymd\TH:i:s' ) );
+			return new \IXR_Date( get_gmt_from_date( mysql2date( 'Y-m-d H:i:s', $date, false ), 'Ymd\TH:i:s' ) );
 		}
 		return $this->_convert_date( $date_gmt );
 	}
@@ -1128,11 +1130,13 @@ class SupraXmlrpcServer {
 
         extract($args);
 
+        /*
 		$blog_id        = (int) $args[0];
 		$username       = $args[1];
 		$password       = $args[2];
 		$post_id        = (int) $args[3];
 		$content_struct = $args[4];
+        */
 
 		if ( ! $user = $this->login( $username, $password ) )
 			return $this->error;
@@ -3167,7 +3171,7 @@ class SupraXmlrpcServer {
 		$path = $current_blog->path . 'xmlrpc.php';
 		$protocol = is_ssl() ? 'https' : 'http';
 
-		$rpc = new IXR_Client("$protocol://{$domain}{$path}");
+		$rpc = new \IXR_Client("$protocol://{$domain}{$path}");
 		$rpc->query('wp.getUsersBlogs', $args[1], $args[2]);
 		$blogs = $rpc->getResponse();
 

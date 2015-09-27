@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: csv,import,parser,ingest,custom post,extract,export,attachments,thumbnails
 Requires at least: 3.2.1
 Tested up to: 4.0
-Stable tag: 2.0.2
+Stable tag: 2.0.4
 
 A plugin to ingest and extract posts from csv files. 
 
@@ -42,6 +42,12 @@ Make sure there are no special characters in the csv values. The will show as qu
 6. Easily debug issues
 
 == Changelog ==
+= 2.0.4 =
+* Fixing issues that prevented post editing. 
+* Added errors and tips for php max_exution time.
+* Added exception if exec is not enabled when using multithreading.
+= 2.0.3 = 
+Fixing issues with ingesting dates
 = 2.0.2 =
 * fixing a path resolver bug that prevented debug button from working
 * adding the post ID to the extraction page

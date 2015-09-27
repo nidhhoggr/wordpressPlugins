@@ -80,7 +80,8 @@ class SupraCsvAjaxHandler extends SupraCsvPlugin {
             $params['mapping']  = $mapping;
             $params['filename'] = $request['args']['filename'];
             $result = $ic->ingest($params);
-
+            $errors = $ic->getSupraCsvParser()->getErrorTips();
+            
             if(is_object($result))
             {
                 $chunk_namespace = $result->getChunkNamespace();
@@ -89,7 +90,7 @@ class SupraCsvAjaxHandler extends SupraCsvPlugin {
             }
             else
             {
-                echo json_encode(compact('result'), true);
+                echo json_encode(compact('result','errors'), true);
             }
 
             break;
@@ -100,8 +101,9 @@ class SupraCsvAjaxHandler extends SupraCsvPlugin {
             if(!empty($chunkNamespace))
             {
                 $output = $ic->pollIngestionCompletion($chunkNamespace);
+                $errors = $ic->getSupraCsvParser()->getErrorTips();
 
-                echo json_encode(compact('output'));
+                echo json_encode(compact('output','errors'));
             }
 
             break;

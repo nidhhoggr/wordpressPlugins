@@ -36,6 +36,11 @@ class IngestCsv {
         //lets do asynch processing here
         if(@ $this->misc_options['is_ingestion_chunked'])
         {       
+            if(!$this->scp->is_func_enabled('exec'))
+            {
+                Throw new exception("php exec function is disabled.");
+            }
+        
             $mapping = $mapper->getMapping();
 
             $mappingFile = $this->scp->getPluginChunkDir() . '/' . basename($csvFile) . '.mapping';
