@@ -2,7 +2,7 @@
 /*
    Plugin Name: Supra Scraper Pro
    Plugin URI: http://wordpress.org/extend/plugins/supra-scraper/
-   Version: 1.0.1
+   Version: 1.0.7
    Author: zmijevik
    Description: A plugin to stratgeically scrape web pages
    Text Domain: suprascraper

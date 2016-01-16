@@ -4,11 +4,22 @@ require_once('classes/SupraScraperJobPersistence.class.php');
 
 class Postingestorwebscraper_Plugin extends Postingestorwebscraper_LifeCycle {
 
+    public function __construct() {
+        $logdir = dirname(__FILE__) . '/logs';
+        $logfile = $logdir . '/error_log';
+        $fh = @fopen($logfile, 'w');
+        if(!is_resource($fh)) {
+            echo sprintf('<span class="error">Cannot create an error log file at %s, please run the follwing command: <br />chmod 0777 %s</span>', $logfile, $logdir);
+        }
+        ini_set("log_errors", 1);
+        ini_set("error_log", $logfile);
+        ini_set("display_errors" , "0");
+    }
 
     private $download_link = 'www.supraliminalsolutions.com/blog/listings/supra-scraper/';
     private $csv_dir = "csv";
     private $extracted_csv_dir = "extracted-csv";
-
+    private $expected_postmeta_scraping_keys = array("meta_key","nodeselector","nodeattr");
 
     /**
      * See: http://plugin.michael-simpson.com/?page_id=31
@@ -194,11 +205,21 @@ class Postingestorwebscraper_Plugin extends Postingestorwebscraper_LifeCycle {
 
         $selectors = array();
 
+        unset($option["use_metakey"]);
+
         foreach((array)$option as $mm_group=>$metakeymapping)
         {
             foreach((array)$metakeymapping as $i=>$mm_val)
             {
                 $selectors[$i][$mm_group] = $mm_val;
+
+                foreach($this->expected_postmeta_scraping_keys as $expected_key) {
+
+                    if(!array_key_exists($expected_key, $selectors[$i])) {
+                        $default_val = ($expected_key == "nodeattr")?"plaintext":"";
+                        $selectors[$i][$expected_key] = $default_val;
+                    }
+                }
             }
         }
 

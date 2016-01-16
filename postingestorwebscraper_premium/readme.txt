@@ -6,7 +6,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: scraper,webscraper,web parser,parser,web spider,spider,bot
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,15 @@ The purpose of this plugin is to scrape a list of links from a csv file or a tex
 
 == Changelog ==
 
+= 1.0.7 =
+ - Adding a user agent string
+= 1.0.6 =
+ - fixing a broken tooltip for postmeta and adding soft faulures for content with no nodes
+= 1.0.5 =
+ - Adding the value to postmeta that allow storing the URI of the site that was scraped in post Meta.
+= 1.0.4 =
+ - Adding a node selector with a default value of plaintext
+ - Adding a logging featuyre to prevent php warning from braking ajax
 = 0.3 =
  - fixing issues with updating posts 
  - added error messages when jobs have mismatching associated post ids

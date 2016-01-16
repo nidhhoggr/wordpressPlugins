@@ -54,8 +54,10 @@ class SupraCsvAttachmentCreator extends \SupraCsvParser_Plugin {
             $filename = end(explode('/',$filepath));
 
             $fnp = explode('.',$filename);
+            
+            $extension = end($fnp);
 
-            $ext = strtolower($fnp[1]);
+            $ext = strtolower($extension);
 
             $imageType = $imgTypes[$ext];
 
@@ -81,7 +83,7 @@ class SupraCsvAttachmentCreator extends \SupraCsvParser_Plugin {
 
         $fnp = explode('.',$filename);
 
-        $proposed_filename = $fnp[0] . '.' . $fnp[1];
+        $proposed_filename = $fnp[0] . '.' . end($fnp);
 
         $wp_upload_dir = wp_upload_dir();
 
@@ -89,7 +91,7 @@ class SupraCsvAttachmentCreator extends \SupraCsvParser_Plugin {
 
         while(file_exists($wp_upload_dir['path'] . '/' . $proposed_filename )) {
 
-            $proposed_filename = $fnp[0] . '_' . $i . '.' . $fnp[1];
+            $proposed_filename = $fnp[0] . '_' . $i . '.' . end($fnp);
             $i++;
         }
 

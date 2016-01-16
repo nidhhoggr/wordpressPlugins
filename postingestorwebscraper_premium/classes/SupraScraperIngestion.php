@@ -15,11 +15,13 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         //$sscrapingest['scrapeimages'] = $request['sscrap_scrapeimages'];
         //$sscrapingest['scrapelinks'] = $request['sscrap_scrapelinks'];
         $sscrapingest['contentselector'] = $request['sscrap_contentselector'];
+        $sscrapingest['useragent'] = $request['sscrap_useragent'];
         $sscrapingest['storemeta'] = $request['sscrap_storemeta'];
         if(!empty($sscrapingest['storemeta'])) {
             $sscrapingest['pm_title'] = $request['sscrap_pmtitle'];
             $sscrapingest['pm_keys'] = $request['sscrap_pmkeys'];
             $sscrapingest['pm_desc'] = $request['sscrap_pmdesc'];
+            $sscrapingest['pm_source'] = $request['sscrap_pmsource'];
         }
         //$sscrap_adap['ffb'] = $request['sscrap_ffb'];
         //if(!empty($sscrap_adap['ffb']))
@@ -37,7 +39,8 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         $metakey_mapping = array(
             'use_metakey' => $request['sscrap_use_metakey'],
             'meta_key' => $request['sscrap_meta_key'],
-            'nodeselector' => $request['sscrap_nodeselector']
+            'nodeselector' => $request['sscrap_nodeselector'],
+            'nodeattr' => $request['sscrap_nodeattr']
         );
 
         update_option('sscrap_metakeymapping',$metakey_mapping);
@@ -213,7 +216,7 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         if($options['ingest_debugger'])
             $this->debugInfo[] = 'ingesting page '.$page;
 
-        $pi = new PageIngestor($page, $options['ingest']['contentselector']);
+        $pi = new PageIngestor($page, $options['ingest']['contentselector'], $options['ingest']['useragent']);
 
         if(!$pi->isParseable())
             return array('aErrs'=>array($page . ' is not parseable'));
@@ -260,19 +263,24 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
                 $this->debugInfo[] = 'Successfully created post id of ' . $post_id;
 
             /***pps***/
-
             $selectors = $this->getMetaKeyMapping();
 
-            $postMeta = $pi->getPagePostMeta($selectors);
-
-            foreach($postMeta as $meta_key=>$meta_value)
+            try 
             {
-                add_post_meta($post_id, $meta_key, $meta_value);
+                $postMeta = $pi->getPagePostMeta($selectors);
 
-                if($options['ingest_debugger'])
-                    $this->debugInfo[] = "ingesting post meta key of $meta_key: $meta_value";
+                foreach($postMeta as $meta_key=>$meta_value)
+                {
+                    add_post_meta($post_id, $meta_key, $meta_value);
+
+                    if($options['ingest_debugger'])
+                        $this->debugInfo[] = "ingesting post meta key of $meta_key: $meta_value";
+                }
+            } 
+            catch(Exception $e) 
+            {
+                $aErrs[] = $e->getMessage();    
             }
-
             /***pps***/
         }
 
@@ -283,6 +291,7 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
             $titlePm = $options['ingest']['pm_title'];
             $keysPm = $options['ingest']['pm_keys'];
             $descPm = $options['ingest']['pm_desc'];
+            $sourcePm = $options['ingest']['pm_source'];
 
             if(!empty($titlePm ))
                 $pmr[] = add_post_meta($post_id,$titlePm,$title,true);
@@ -292,6 +301,14 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
 
             if(!empty($descPm) && count($meta['desc']))
                 $pmr[] = add_post_meta($post_id,$descPm,$meta['desc'],true);
+
+            if(!empty($sourcePm))
+                $pmr[] = add_post_meta($post_id,$sourcePm,$page,true);
+ 
+        }
+
+        if($pi->hasErrors()) {
+            $aErrs = array_merge($aErrs, $pi->getErrors());
         }
 
         return compact('aErrs','post_id');
@@ -327,7 +344,7 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         if($options['ingest_debugger'])
             $this->debugInfo[] = 'updating page '.$page;
 
-        $pi = new PageIngestor($page, $options['ingest']['contentselector']);
+        $pi = new PageIngestor($page, $options['ingest']['contentselector'], $options['ingest']['useragent']);
 
         if(!$pi->isParseable())
             return array('aErrs'=>array($page . ' is not parseable'));
@@ -392,6 +409,7 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
             $titlePm = $options['ingest']['pm_title'];
             $keysPm = $options['ingest']['pm_keys'];
             $descPm = $options['ingest']['pm_desc'];
+            $sourcePm = $options['ingest']['pm_source'];
 
             if(!empty($titlePm ))
                 $pmr[] = update_post_meta($post_id,$titlePm,$title,true);
@@ -401,6 +419,13 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
 
             if(!empty($descPm) && count($meta['desc']))
                 $pmr[] = update_post_meta($post_id,$descPm,$meta['desc'],true);
+
+            if(!empty($sourcePm))
+                $pmr[] = add_post_meta($post_id,$sourcePm,$page,true);
+        }
+
+        if($pi->hasErrors()) {
+            $aErrs = array_merge($aErrs, $pi->getErrors());
         }
 
         return compact('aErrs','post_id');

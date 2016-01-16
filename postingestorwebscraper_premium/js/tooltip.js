@@ -41,6 +41,7 @@ SupraScraper.Tooltips = (function() {
         'ingest_tt':['ingest'],
 
         'metakeymapping_tt':['metakeymapping'],
+        'mkm_nodeattr_tt':['mkm_nodeattr'],
         'targetupdate_tt':['st_targetupdate']
     }
 

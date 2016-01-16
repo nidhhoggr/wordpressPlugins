@@ -7,16 +7,26 @@ class PageIngestor
 
     private 
         $site_domain,
-        $content_width = null;
+        $content_width = null,
+        $aErrs = array(),
+        $filename
+        ;
 
-    function __construct($page = false, $contentSelector = false) 
+    function __construct($page = false, $contentSelector = false, $userAgent = false) 
     {
 
         if($page) 
         { 
             $this->_setFilename($page);
-            $this->page = file_get_html($page);
-
+            if($userAgent) {
+                $context = stream_context_create();
+                $this->aErrs[] = "sending with useragent: " . $userAgent;
+                stream_context_set_params($context, array('user_agent' => $userAgent));
+                $this->page = file_get_html($page, 0, $context);
+            }
+            else {
+                $this->page = file_get_html($page);
+            }
             if($this->isParseable()) 
             { 
                 if($contentSelector) $this->setContentDiv($contentSelector); 
@@ -24,6 +34,14 @@ class PageIngestor
                 $this->_setContent();
             }
         }
+    }
+
+    public function hasErrors() {
+        return count($this->aErrs > 0);
+    }
+    
+    public function getErrors() {
+        return $this->aErrs;
     }
 
     public function isParseable() 
@@ -120,14 +138,19 @@ class PageIngestor
         {
             extract($group_vals);
 
-            $node_obj = $this->page->find($nodeselector, 0);
+            if(empty($nodeattr)) $nodeattr = "plaintext";
 
-            if(is_object($node_obj))
+            $node_obj = $this->page->find($nodeselector, 0);
+            
+            if(!property_exists($node_obj, $nodeattr) && empty($node_obj->$nodeattr)) 
             {
-                $meta[$meta_key] = $node_obj->plaintext;
+                 $this->aErrs[] = sprintf("'%s' is a not a valid node attribute of the node selector '%s' in page: %s", $nodeattr,  $nodeselector, $this->filename);
+            }   
+            else if(is_object($node_obj))
+            {
+                $meta[$meta_key] = $node_obj->$nodeattr;
             }
         }
-
         return $meta;
     }
 

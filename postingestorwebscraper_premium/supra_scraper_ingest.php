@@ -107,10 +107,11 @@ print_r($encode_chars);
             <span id="storepostmeta_tt" class="tooltip"></span>Store Post Meta: 
             <input type="checkbox" name="sscrap_storemeta" value="true" <?php echo ($sscrapingest['storemeta'])?'checked="checked"':''?>>
         </p>
-        <h4><span id="postdefaults_tt" class="tooltip"></span>Post Meta Keys</h4>
+        <h4><span id="postmetakeys_tt" class="tooltip"></span>Post Meta Keys</h4>
         <p>Title:<input type="text" name="sscrap_pmtitle" value="<?php echo $sscrapingest['pm_title']; ?>" size="20"></p>
         <p>Meta Keywords:<input type="text" name="sscrap_pmkeys" value="<?php echo $sscrapingest['pm_keys']; ?>" size="20"></p>
         <p>Meta Description:<input type="text" name="sscrap_pmdesc" value="<?php echo $sscrapingest['pm_desc']; ?>" size="20"></p>
+        <p>Content Source:<input type="text" name="sscrap_pmsource" value="<?php echo $sscrapingest['pm_source']; ?>" size="20"></p>
 
         <hr /> 
 
@@ -124,6 +125,7 @@ print_r($encode_chars);
                     <tr>
                         <th>Post Meta Key</th>
                         <th>Node Selector</th>
+                        <th>Node Content Attribute<span id="mkm_nodeattr_tt" class="tooltip"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -145,6 +147,9 @@ print_r($encode_chars);
                 case "nodeselector":
                     echo '<td><input type="text" name="sscrap_nodeselector[]" id="nodeselector" value="'.$mm_col_v.'"></td>';
                     break;
+                case "nodeattr":
+                    echo '<td><input type="text" name="sscrap_nodeattr[]" id="nodeattr" value="'.$mm_col_v.'"></td>';
+                    break;
             }
         }
 
@@ -156,6 +161,7 @@ print_r($encode_chars);
                    <tr id="pm_info0" class="pm_info">
                         <td><input type="text" name="sscrap_meta_key[]" id="meta_key" value=""></td>
                         <td><input type="text" name="sscrap_nodeselector[]" id="nodeselector" value=""></td>
+                        <td><input type="text" name="sscrap_nodeattr[]" id="nodeattr" value=""></td>
                     </tr>
 <?php
     endif;
@@ -195,6 +201,10 @@ print_r($encode_chars);
         <p>
             <span id="randomize_max_tt" class="tooltip"></span>Maximum Interval
             <input type="text" name="sscrap_randomize_max_int" value="<?php echo $randomize['max_int']?>" size="2">
+        </p>
+        <p>
+            <span id="useragent_tt" class="tooltip"></span>User Agent
+            <textarea name="sscrap_useragent" id="sscrap_useragent"><?php echo $sscrapingest['useragent']?></textarea></p>
         </p>
         <hr />
         <h3><span id="scrapertarget_tt" class="tooltip"></span>Scraper Target</h3>

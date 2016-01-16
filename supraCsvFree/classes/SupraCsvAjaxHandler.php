@@ -98,7 +98,7 @@ class SupraCsvAjaxHandler extends SupraCsvPlugin {
             if(!empty($chunkNamespace))
             {
                 $output = $ic->pollIngestionCompletion($chunkNamespace);
-                $errors = $ic->getSupraCsvParser()->getErrorTips()
+                $errors = $ic->getSupraCsvParser()->getErrorTips();
 
                 echo json_encode(compact('output','errors'));
             }

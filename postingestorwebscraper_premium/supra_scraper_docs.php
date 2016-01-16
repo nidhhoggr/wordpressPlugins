@@ -229,7 +229,8 @@
       <li id="postmetakeys">
         Post Meta Keys
         <p>
-        These are where the post meta keys are provided. For example one SEO plugin happens to use the following values: _su_title, _su_keywords, and _su_description
+        These are where the post meta keys are provided. For example one SEO plugin happens to use the following values: _su_title, _su_keywords, and _su_description.
+        The Source can also be stored which cooresponds to the URI of the page being scraped.
         </p>
       </li>
     </ol>
@@ -333,6 +334,9 @@
       The purpose of this section is to scrape the content of child nodes into post meta. The Post Meta Key specified stores a value of the Node Selector Specified if any content was scraped and the node existed.
       </p>
     </li>
+    <li id="mkm_nodeattr">
+        Node attribute are the attribute which contains the value you wish to scrape. For example, if you want the source of an image tag you would provide a value of <b>src</b> for the node attribute. If you want the html within node you specify <b>innertext</b> and if you want only text within a node without the html tags, specify <b>plaintext</b>.
+    <li>
   </ol>
 </ol>
 </div>
