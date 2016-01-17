@@ -16,6 +16,7 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         //$sscrapingest['scrapelinks'] = $request['sscrap_scrapelinks'];
         $sscrapingest['contentselector'] = $request['sscrap_contentselector'];
         $sscrapingest['useragent'] = $request['sscrap_useragent'];
+        $sscrapingest['stripbreaks'] = ($request['sscrap_stripbreaks'] === "true");
         $sscrapingest['storemeta'] = $request['sscrap_storemeta'];
         if(!empty($sscrapingest['storemeta'])) {
             $sscrapingest['pm_title'] = $request['sscrap_pmtitle'];
@@ -216,7 +217,10 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         if($options['ingest_debugger'])
             $this->debugInfo[] = 'ingesting page '.$page;
 
-        $pi = new PageIngestor($page, $options['ingest']['contentselector'], $options['ingest']['useragent']);
+        $pi = new PageIngestor($page, $options['ingest']['contentselector'], array(
+            "userAgent" => $options['ingest']['useragent'],
+            "stripLineBreaks" => $options['ingest']['stripbreaks']
+        ));
 
         if(!$pi->isParseable())
             return array('aErrs'=>array($page . ' is not parseable'));
@@ -344,7 +348,11 @@ class SupraScraperIngestion extends Postingestorwebscraper_Plugin {
         if($options['ingest_debugger'])
             $this->debugInfo[] = 'updating page '.$page;
 
-        $pi = new PageIngestor($page, $options['ingest']['contentselector'], $options['ingest']['useragent']);
+        $pi = new PageIngestor($page, $options['ingest']['contentselector'], array(
+            "userAgent" => $options['ingest']['useragent'],
+            "stripLineBreaks" => $options['ingest']['stripbreaks']
+        )); 
+
 
         if(!$pi->isParseable())
             return array('aErrs'=>array($page . ' is not parseable'));

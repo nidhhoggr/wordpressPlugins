@@ -12,20 +12,21 @@ class PageIngestor
         $filename
         ;
 
-    function __construct($page = false, $contentSelector = false, $userAgent = false) 
+    function __construct($page = false, $contentSelector = false, $options = array()) 
     {
+        $stripLineBreaks = false;
 
         if($page) 
         { 
             $this->_setFilename($page);
-            if($userAgent) {
+            if(isset($options['userAgent']) && !empty($options['userAgent'])) {
                 $context = stream_context_create();
-                $this->aErrs[] = "sending with useragent: " . $userAgent;
+                $this->aErrs[] = "sending with useragent: " . var_export($options, true);
                 stream_context_set_params($context, array('user_agent' => $userAgent));
-                $this->page = file_get_html($page, 0, $context);
+                @$this->page = file_get_html($page, 0, $context, null, null, null, null, null, $options['stripLineBreaks']);
             }
             else {
-                $this->page = file_get_html($page);
+                @$this->page = file_get_html($page, null, null, null, null, null, null, null, $options['stripLineBreaks']);
             }
             if($this->isParseable()) 
             { 

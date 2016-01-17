@@ -204,7 +204,11 @@ print_r($encode_chars);
         </p>
         <p>
             <span id="useragent_tt" class="tooltip"></span>User Agent
-            <textarea name="sscrap_useragent" id="sscrap_useragent"><?php echo $sscrapingest['useragent']?></textarea></p>
+            <br /><textarea name="sscrap_useragent" id="sscrap_useragent"><?php echo $sscrapingest['useragent']?></textarea></p>
+        </p>
+        <p id="stripbreaks">
+            <span id="stripbreaks_tt" class="tooltip"></span>Strip Line Breaks
+            <input type="checkbox" name="sscrap_stripbreaks" value="true" <?php echo($sscrapingest['stripbreaks'])?'checked="checked"':''?>>
         </p>
         <hr />
         <h3><span id="scrapertarget_tt" class="tooltip"></span>Scraper Target</h3>

@@ -1,3 +1,0 @@
-rm -f supraCsvPremium/logs/*
-rm -f supraCsvPremium/chunks/*
-zip -r zips/csv/scp$1.zip supraCsvPremium

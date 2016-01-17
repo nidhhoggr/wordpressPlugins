@@ -6,7 +6,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: scraper,webscraper,web parser,parser,web spider,spider,bot
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,8 @@ The purpose of this plugin is to scrape a list of links from a csv file or a tex
 
 == Changelog ==
 
+= 1.0.8 =
+ - Adding option to strip line breaks from ingeste content
 = 1.0.7 =
  - Adding a user agent string
 = 1.0.6 =
