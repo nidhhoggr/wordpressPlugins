@@ -1,0 +1,12 @@
+#open_form .input label {
+    display: block;
+}
+
+#open_form .input input,
+#open_form .input textarea {
+    display: block;
+}
+
+#open_form .input input[type="radio"] {
+    display: inline;
+}

@@ -1,0 +1,152 @@
+      #input_builder_tools .input {
+          display: inline;
+      }
+
+      #builder_actions .input {
+          display: inline;
+      }
+
+      #left_of {
+          float: left;
+          width: 50%;
+          text-align: left;
+      }
+    
+      #right_of {
+          float: right;
+          width: 50%;
+          text-align: left;
+      }
+    
+      #cleaner {
+          clear: both;
+      }
+
+      .input_crud {
+      }
+
+      .input_crud .input {
+          display: inline;
+      }
+ 
+      #form_built .input {
+      }
+
+      .input label {
+          vertical-align: top;
+      }
+
+      #form_built .input, #form_built .input_crud {
+          padding: 10px;
+      }
+
+      #form_built .input .input, #form_built .input_crud .input {
+          padding: 0px;
+          border: none;
+      }
+
+      #success_msg_div label {
+          display: block;
+      }
+
+
+      #notify { 
+          font-weight: bold; 
+          font-family: arial; 
+      } 
+ 
+      #notify .success { 
+          background-color: green; 
+          padding: 10px;
+      }
+
+      #notify .error { 
+          background-color: red; 
+          padding: 10px;
+      }
+
+ 
+      
+
+    #sof_info th, td {
+        width: 33%;
+        padding: 10px;
+    }
+
+    #sof_info_row #form_shortcode {
+        background-color: yellow;
+    }
+
+    #sof_info_row #form_name, #form_submission_count span {
+        text-decoration: underline;
+    }
+
+    #sof_info .odd {
+        background-color: #ededed;
+    }
+
+    #sof_info .even {
+        background-color: #bdbdbd;
+    }
+
+
+      .form_row {
+          padding: 10px 5px 10px 0px;
+      }
+
+      .form_row div {
+          padding: 5px;
+          display: inline;
+      }
+ 
+      .form_row .view_submissions, .form_row .view_form, .form_row .edit_form, .fs_row .view_submission {
+          text-decoration: underline;
+          font-weight: bold;
+      }
+
+      #open_form .form_name, #open_form_viewer .form_name, #form_submission_header, #form_submissions_header {
+          font-size: 18px;
+          font-weight:bold;
+          padding: 10px 10px 10px 0px;
+      }
+
+      #form {
+          padding: 10px;
+      }
+
+      #form_submissions, #form_submissions_header {
+          position: relative;
+          left: 50px;
+      }
+
+      #form_submission, #form_submission_header {
+          position: relative;
+          left: 100px;
+      }
+
+      .input_row div {
+          display: inline;
+          padding: 3px 5px 3px 5px;
+      }
+ 
+      .input_row .input_value {
+          font-style: italic;
+          font-size: 12px;
+      }
+
+
+
+      #open_form_viewer .input label,
+      #open_form_viewer .input legend {
+          display: block;
+          font-weight: bold;
+      }
+
+      #open_form_viewer .input input,
+      #open_form_viewer .input textarea {
+          display: block;
+      }
+
+      #open_form_viewer .input input[type="radio"] {
+          display: inline;
+      }
